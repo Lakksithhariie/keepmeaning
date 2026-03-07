@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -78,15 +79,20 @@ const LandingPage = () => {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full bg-km-red text-white overflow-x-hidden relative flex flex-col selection:bg-white selection:text-km-red">
-      {/* Grid Pattern with Linear Gradient Mask */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Top Marketing Banner */}
+      <div className="bg-white text-km-red text-[10px] font-bold uppercase tracking-[0.3em] py-2 text-center sticky top-0 z-[100] shadow-sm">
+        The Ritual is Open. 100% Free Public Beta Access.
+      </div>
+
+      {/* Grid Pattern Background - FIXED POS */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <svg
           className="absolute inset-0 h-full w-full stroke-white/20 [mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
           aria-hidden="true"
         >
           <defs>
             <pattern
-              id="grid-pattern"
+              id="grid-pattern-prod"
               width="40"
               height="40"
               patternUnits="userSpaceOnUse"
@@ -96,106 +102,97 @@ const LandingPage = () => {
               <path d="M.5 40V.5H40" fill="none" strokeWidth="1" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" strokeWidth="0" fill="url(#grid-pattern)" />
+          <rect width="100%" height="100%" strokeWidth="0" fill="url(#grid-pattern-prod)" />
         </svg>
       </div>
 
-      {/* Top Bar */}
-      <div className="flex justify-between items-start p-6 md:p-12 relative z-20 shrink-0">
+      {/* NAV - 3 COLUMN GRID FOR MATHEMATICAL CENTERING */}
+      <nav className="grid grid-cols-[1fr_auto_1fr] items-center p-12 px-8 md:px-16 relative z-20 shrink-0">
         {/* Left Box */}
-        <div className="flex border-[2px] border-white shrink-0">
-          <div className="bg-km-red p-2 md:p-3"><Heart className="w-5 h-5 md:w-6 md:h-6 fill-white" /></div>
-          <div className="bg-white p-2 md:p-3"><Star className="w-5 h-5 md:w-6 md:h-6 text-km-red fill-km-red" /></div>
+        <div className="justify-self-start flex border-[2px] border-white shrink-0">
+          <div className="bg-km-red p-3"><Heart className="w-6 h-6 fill-white" /></div>
+          <div className="bg-white p-3"><Star className="w-6 h-6 text-km-red fill-km-red" /></div>
         </div>
         
         {/* Center Text */}
-        <div className="text-center font-serif text-sm md:text-xl leading-tight mt-2 hidden sm:block">
+        <div className="text-center font-serif text-xl leading-tight hidden sm:block">
           Every piece of writing<br/>deserves a love story.<br/>We know how<br/>to write it.
         </div>
         
         {/* Right Logo */}
-        <div className="relative mt-2">
-          <div className="font-display text-2xl md:text-4xl leading-[0.85] uppercase tracking-wide text-right">
+        <div className="justify-self-end relative">
+          <div className="font-display text-4xl leading-[0.85] uppercase tracking-wide text-right">
             Keep<br/>Meaning
           </div>
           <span className="absolute -bottom-4 right-0 font-serif text-[12px] lowercase opacity-60">beta</span>
         </div>
-      </div>
+      </nav>
 
-      {/* Middle Content */}
-      <div className="flex-1 flex flex-col items-center justify-center text-center w-full z-20 px-4 py-20">
-        <div className="font-display text-4xl md:text-6xl lg:text-7xl leading-[0.9] tracking-wide uppercase max-w-4xl mx-auto mb-10 md:mb-12">
+      {/* HERO SECTION - VERTICAL RHYTHM SYSTEM */}
+      <main className="flex-1 flex flex-col items-center text-center w-full z-20 pt-18 pb-0 px-0">
+        <div className="font-display text-4xl md:text-6xl lg:text-7xl leading-[0.9] tracking-wide uppercase max-w-4xl mx-auto mb-12 px-6">
           We Steal the Soul<br/>Back from the Machine
         </div>
 
-        <button 
-          onClick={() => navigate('/canvas')}
-          className="border-[3px] border-white bg-km-red px-6 py-3 md:px-8 md:py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center gap-4 mx-auto shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-[0px_0px_0px_rgba(255,255,255,1)] hover:translate-y-1 hover:translate-x-1 mb-20"
-        >
-          Enter Workspace <Sparkles className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
-        </button>
+        {/* CTA GROUP - FLEX COLUMN WITH 20PX GAP */}
+        <div className="flex flex-col items-center gap-5 mb-24 px-6">
+          <button 
+            onClick={() => navigate('/canvas')}
+            className="border-[3px] border-white bg-km-red px-8 py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center gap-4 shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-y-1 hover:translate-x-1"
+          >
+            Enter Workspace <Sparkles className="w-6 md:w-6 md:h-6 group-hover:animate-pulse" />
+          </button>
 
-        {/* Feature Highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-6xl mx-auto text-left mb-32 px-6">
-          <div className="space-y-4">
+          <div className="flex flex-col items-center gap-2">
+            <p className="font-display text-xs uppercase tracking-[0.4em] text-white">Full Access • No Subscription • Zero Cost</p>
+            <p className="font-serif text-sm italic opacity-40">"The machine should not own your meaning. Take it back, for free."</p>
+          </div>
+        </div>
+
+        {/* FEATURES - FULL WIDTH BORDERED GRID SYSTEM */}
+        <section className="grid grid-cols-1 md:grid-cols-3 border-y border-white/20 w-full mb-20">
+          <div className="p-10 md:p-16 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Ghost size={20} className="text-white" />
             </div>
             <h3 className="font-display text-2xl uppercase tracking-tight">Ghostwriter Logic</h3>
             <p className="font-serif text-base leading-relaxed opacity-70">Not just rephrasing. We inject human rhythm, asymmetrical syntax, and visceral metaphors into every draft.</p>
           </div>
-          <div className="space-y-4">
+          
+          <div className="p-10 md:p-16 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Bolt size={20} className="text-white" />
             </div>
             <h3 className="font-display text-2xl uppercase tracking-tight">Triple Engine Power</h3>
             <p className="font-serif text-base leading-relaxed opacity-70">Switch between Core, Fast, and Air engines to find the perfect balance of stability, velocity, and depth.</p>
           </div>
-          <div className="space-y-4">
+          
+          <div className="p-10 md:p-16 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Infinity size={20} className="text-white" />
             </div>
             <h3 className="font-display text-2xl uppercase tracking-tight">100% Free Access</h3>
             <p className="font-serif text-base leading-relaxed opacity-70">We are currently in public beta. All features are free to use as we refine the alchemy of meaning together.</p>
           </div>
-        </div>
+        </section>
+      </main>
 
-        {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto text-left px-6 pb-20">
-          <h2 className="font-display text-4xl uppercase tracking-tighter mb-12 border-b border-white/20 pb-4">Common Questions</h2>
-          <div className="space-y-10">
-            <div>
-              <h4 className="font-display text-lg uppercase tracking-wider mb-2 text-white">Is it really free?</h4>
-              <p className="font-serif text-base opacity-60">Yes. During our beta phase, we want practitioners to push the limits of the tool without friction. All we ask is for your feedback.</p>
-            </div>
-            <div>
-              <h4 className="font-display text-lg uppercase tracking-wider mb-2 text-white">How is this different from ChatGPT?</h4>
-              <p className="font-serif text-base opacity-60">ChatGPT writes like a machine pretending to be human. We use 'Invisible Skills' to enforce human-only rhythms and purge the robotic markers that plague AI writing.</p>
-            </div>
-            <div>
-              <h4 className="font-display text-lg uppercase tracking-wider mb-2 text-white">Who is this for?</h4>
-              <p className="font-serif text-base opacity-60">Founders, specialists, and builders who have the expertise but need a partner to help distill it into a voice that resonates.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Massive Text */}
-      <div className="relative w-full flex justify-center items-end pointer-events-none z-10 overflow-hidden shrink-0 pt-10">
-        <h1 className="font-display text-[22vw] leading-[0.75] uppercase tracking-tighter m-0 text-center flex flex-col translate-y-[10%]">
-          <span>Keep</span>
+      {/* BRAND STAMP - EDITORIAL CROP */}
+      <footer className="h-[280px] flex items-end overflow-hidden relative w-full pointer-events-none z-10 shrink-0">
+        <h1 className="font-display text-[22vw] leading-[0.75] uppercase tracking-tighter m-0 text-center w-full flex flex-col translate-y-[15%]">
+          <span className="opacity-0 select-none">Keep</span>
           <span>Meaning</span>
         </h1>
         
-        {/* Scattered Hearts (Cutout effect) */}
-        <Heart className="absolute bottom-[60%] left-[22%] w-8 h-8 md:w-16 md:h-16 fill-km-red text-km-red rotate-12" />
-        <Heart className="absolute bottom-[25%] left-[38%] w-6 h-6 md:w-12 md:h-12 fill-km-red text-km-red -rotate-12" />
-        <Heart className="absolute bottom-[45%] right-[28%] w-10 h-10 md:w-20 md:h-20 fill-km-red text-km-red rotate-45" />
-        <Heart className="absolute bottom-[15%] right-[18%] w-5 h-5 md:w-10 md:h-10 fill-km-red text-km-red -rotate-6" />
-        <Heart className="absolute bottom-[75%] left-[48%] w-7 h-7 md:w-14 md:h-14 fill-km-red text-km-red rotate-3" />
-        <Heart className="absolute bottom-[30%] left-[15%] w-5 h-5 md:w-10 md:h-10 fill-km-red text-km-red -rotate-12" />
-        <Heart className="absolute bottom-[65%] right-[15%] w-6 h-6 md:w-12 md:h-12 fill-km-red text-km-red rotate-12" />
-      </div>
+        {/* Scattered Hearts */}
+        <Heart className="absolute bottom-[60%] left-[22%] w-16 h-16 fill-km-red text-km-red rotate-12" />
+        <Heart className="absolute bottom-[25%] left-[38%] w-12 h-12 fill-km-red text-km-red -rotate-12" />
+        <Heart className="absolute bottom-[45%] right-[28%] w-20 h-20 fill-km-red text-km-red rotate-45" />
+        <Heart className="absolute bottom-[15%] right-[18%] w-10 h-10 fill-km-red text-km-red -rotate-6" />
+        <Heart className="absolute bottom-[75%] left-[48%] w-14 h-14 fill-km-red text-km-red rotate-3" />
+        <Heart className="absolute bottom-[30%] left-[15%] w-10 h-10 fill-km-red text-km-red -rotate-12" />
+        <Heart className="absolute bottom-[65%] right-[15%] w-12 h-12 fill-km-red text-km-red rotate-12" />
+      </footer>
     </div>
   );
 };
@@ -556,7 +553,7 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
                       ))}
                     </div>
                     <p className="text-[10px] font-bold uppercase tracking-widest opacity-40">
-                      Joined by 2,400+ Practitioners
+                      Joined by 100+ Practitioners
                     </p>
                   </div>
                 </div>
