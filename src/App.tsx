@@ -4,7 +4,7 @@ import {
   Copy, RefreshCw, Heart, Star, Check, Sparkles, 
   Command, Trash2, Brain, Zap, Globe, Square, 
   BookOpen, Briefcase, Feather, TrendingUp, ArrowLeft,
-  Mail, Lock, Send
+  Mail, Lock, Send, Ghost, Bolt, Infinity
 } from 'lucide-react';
 import { getHiddenSkillsContext } from './skills';
 
@@ -106,8 +106,11 @@ const LandingPage = ({ onEnter }: { onEnter: () => void }) => {
         </div>
         
         {/* Right Logo */}
-        <div className="font-display text-2xl md:text-4xl leading-[0.85] uppercase tracking-wide text-right mt-2">
-          Keep<br/>Meaning
+        <div className="relative mt-2">
+          <div className="font-display text-2xl md:text-4xl leading-[0.85] uppercase tracking-wide text-right">
+            Keep<br/>Meaning
+          </div>
+          <span className="absolute -bottom-4 right-0 font-serif text-[12px] lowercase opacity-60">beta</span>
         </div>
       </div>
 
@@ -119,10 +122,54 @@ const LandingPage = ({ onEnter }: { onEnter: () => void }) => {
 
         <button 
           onClick={onEnter}
-          className="border-[3px] border-white bg-km-red px-6 py-3 md:px-8 md:py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center gap-4 mx-auto shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-[0px_0px_0px_rgba(255,255,255,1)] hover:translate-y-1 hover:translate-x-1"
+          className="border-[3px] border-white bg-km-red px-6 py-3 md:px-8 md:py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center gap-4 mx-auto shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-[0px_0px_0px_rgba(255,255,255,1)] hover:translate-y-1 hover:translate-x-1 mb-20"
         >
           Enter Workspace <Sparkles className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
         </button>
+
+        {/* Feature Highlights */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-16 max-w-6xl mx-auto text-left mb-32 px-6">
+          <div className="space-y-4">
+            <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
+              <Ghost size={20} className="text-white" />
+            </div>
+            <h3 className="font-display text-2xl uppercase tracking-tight">Ghostwriter Logic</h3>
+            <p className="font-serif text-base leading-relaxed opacity-70">Not just rephrasing. We inject human rhythm, asymmetrical syntax, and visceral metaphors into every draft.</p>
+          </div>
+          <div className="space-y-4">
+            <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
+              <Bolt size={20} className="text-white" />
+            </div>
+            <h3 className="font-display text-2xl uppercase tracking-tight">Triple Engine Power</h3>
+            <p className="font-serif text-base leading-relaxed opacity-70">Switch between Core, Fast, and Air engines to find the perfect balance of stability, velocity, and depth.</p>
+          </div>
+          <div className="space-y-4">
+            <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
+              <Infinity size={20} className="text-white" />
+            </div>
+            <h3 className="font-display text-2xl uppercase tracking-tight">100% Free Access</h3>
+            <p className="font-serif text-base leading-relaxed opacity-70">We are currently in public beta. All features are free to use as we refine the alchemy of meaning together.</p>
+          </div>
+        </div>
+
+        {/* FAQ Section */}
+        <div className="max-w-3xl mx-auto text-left px-6 pb-20">
+          <h2 className="font-display text-4xl uppercase tracking-tighter mb-12 border-b border-white/20 pb-4">Common Questions</h2>
+          <div className="space-y-10">
+            <div>
+              <h4 className="font-display text-lg uppercase tracking-wider mb-2 text-white">Is it really free?</h4>
+              <p className="font-serif text-base opacity-60">Yes. During our beta phase, we want practitioners to push the limits of the tool without friction. All we ask is for your feedback.</p>
+            </div>
+            <div>
+              <h4 className="font-display text-lg uppercase tracking-wider mb-2 text-white">How is this different from ChatGPT?</h4>
+              <p className="font-serif text-base opacity-60">ChatGPT writes like a machine pretending to be human. We use 'Invisible Skills' to enforce human-only rhythms and purge the robotic markers that plague AI writing.</p>
+            </div>
+            <div>
+              <h4 className="font-display text-lg uppercase tracking-wider mb-2 text-white">Who is this for?</h4>
+              <p className="font-serif text-base opacity-60">Founders, specialists, and builders who have the expertise but need a partner to help distill it into a voice that resonates.</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Bottom Massive Text */}
@@ -168,6 +215,7 @@ export default function App() {
   const [emailInput, setEmailInput] = useState('');
   const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
   const [emailSuccess, setEmailSuccess] = useState(false);
+  const [showMethodModal, setShowMethodModal] = useState(false);
   
   // Secret Dev Reset Trigger
   const [titleClickCount, setTitleClickCount] = useState(0);
@@ -404,6 +452,60 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
   return (
     <div className="flex h-screen bg-km-red text-white font-display overflow-hidden selection:bg-km-red selection:text-white">
       
+      {/* Method Modal */}
+      <AnimatePresence>
+        {showMethodModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 md:p-6"
+            onClick={() => setShowMethodModal(false)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="bg-white text-km-red max-w-2xl w-full shadow-[24px_24px_0px_rgba(0,0,0,0.3)] relative overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-km-red"></div>
+              <div className="p-10 md:p-16 space-y-12">
+                <div className="space-y-4">
+                  <h2 className="font-display text-5xl uppercase tracking-tighter leading-none text-black">The Ritual of <span className="text-km-red">Meaning.</span></h2>
+                  <p className="font-serif text-lg opacity-60 italic">How to steal your soul back from the machine.</p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="space-y-2">
+                    <span className="font-display text-[10px] text-km-red tracking-[0.3em] font-bold">[01] THE RAW DRAFT</span>
+                    <p className="font-serif text-sm leading-relaxed text-black/80">Pour your unpolished thoughts. No filter, no performance. Let the raw intent lead.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <span className="font-display text-[10px] text-km-red tracking-[0.3em] font-bold">[02] THE INTELLIGENCE</span>
+                    <p className="font-serif text-sm leading-relaxed text-black/80">Select an Engine. Core for stability, Fast for velocity, Air for deep reasoning.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <span className="font-display text-[10px] text-km-red tracking-[0.3em] font-bold">[03] THE PERSONA</span>
+                    <p className="font-serif text-sm leading-relaxed text-black/80">Choose a Voice. Pick the human heartbeat that matches your specific intent.</p>
+                  </div>
+                  <div className="space-y-2">
+                    <span className="font-display text-[10px] text-km-red tracking-[0.3em] font-bold">[04] THE ALCHEMY</span>
+                    <p className="font-serif text-sm leading-relaxed text-black/80">Hit 'Generate'. Watch as the machine disappears inside your own words.</p>
+                  </div>
+                </div>
+
+                <button 
+                  onClick={() => setShowMethodModal(false)}
+                  className="w-full bg-black text-white py-4 px-8 font-display text-xl uppercase tracking-widest hover:bg-km-red transition-colors"
+                >
+                  I Understand the Ritual
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Email Modal */}
       <AnimatePresence>
         {showEmailModal && (
@@ -549,15 +651,18 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
               Every draft deserves<br/>a love story.
             </div>
           </div>
-          <motion.h1 
-            onClick={() => setTitleClickCount(prev => prev + 1)}
-            className="font-display text-[3rem] leading-[0.85] uppercase tracking-wide m-0 cursor-default select-none"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            Keep<br/>Meaning
-          </motion.h1>
+          <div className="relative w-fit">
+            <motion.h1 
+              onClick={() => setTitleClickCount(prev => prev + 1)}
+              className="font-display text-[3rem] leading-[0.85] uppercase tracking-wide m-0 cursor-default select-none"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+            >
+              Keep<br/>Meaning
+            </motion.h1>
+            <span className="absolute -bottom-4 right-1 font-serif text-[12px] lowercase opacity-40">beta</span>
+          </div>
         </div>
 
         {/* Navigation / Selectors */}
@@ -630,6 +735,19 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
               })}
             </div>
           </div>
+        </div>
+
+        {/* The Ritual Button */}
+        <div className="px-6 pb-4">
+          <motion.button
+            onClick={() => setShowMethodModal(true)}
+            className="w-full flex items-center justify-center gap-3 py-3 border border-white/20 bg-white/5 hover:bg-white text-white hover:text-km-red transition-all duration-300 group shadow-[4px_4px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Sparkles className="w-4 h-4 group-hover:animate-pulse" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Access the Ritual</span>
+          </motion.button>
         </div>
 
         {/* Dev Reset Button - Hidden behind 5 clicks on "Keep Meaning" */}
@@ -713,7 +831,7 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
         {/* Editor Area */}
         <div className="flex-1 overflow-y-auto p-8 md:p-16 lg:px-32 relative selection:bg-km-red selection:text-white">
           {/* Watermark Logo */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.02] pointer-events-none flex flex-col items-center">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.01] pointer-events-none flex flex-col items-center">
             <Heart className="w-48 h-48 mb-8" />
             <div className="font-display text-[10rem] uppercase tracking-tighter text-center leading-[0.8]">Keep<br/>Meaning</div>
           </div>
@@ -723,7 +841,7 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
               <textarea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                className="w-full h-full resize-none outline-none bg-transparent font-serif text-2xl md:text-3xl leading-relaxed text-gray-900 placeholder:text-gray-300"
+                className="w-full h-full resize-none outline-none bg-transparent font-serif text-2xl md:text-3xl leading-relaxed text-gray-900 placeholder:text-gray-200"
                 placeholder="Start your draft here..."
               />
             ) : (
