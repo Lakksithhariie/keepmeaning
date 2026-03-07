@@ -1,6 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
+  BrowserRouter as Router, 
+  Routes, 
+  Route, 
+  useNavigate, 
+  useLocation 
+} from 'react-router-dom';
+import { 
   Copy, RefreshCw, Heart, Star, Check, Sparkles, 
   Command, Trash2, Brain, Zap, Globe, Square, 
   BookOpen, Briefcase, Feather, TrendingUp, ArrowLeft,
@@ -67,7 +74,8 @@ const STYLES = [
   },
 ];
 
-const LandingPage = ({ onEnter }: { onEnter: () => void }) => {
+const LandingPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full bg-km-red text-white overflow-x-hidden relative flex flex-col selection:bg-white selection:text-km-red">
       {/* Grid Pattern with Linear Gradient Mask */}
@@ -121,7 +129,7 @@ const LandingPage = ({ onEnter }: { onEnter: () => void }) => {
         </div>
 
         <button 
-          onClick={onEnter}
+          onClick={() => navigate('/canvas')}
           className="border-[3px] border-white bg-km-red px-6 py-3 md:px-8 md:py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center gap-4 mx-auto shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-[0px_0px_0px_rgba(255,255,255,1)] hover:translate-y-1 hover:translate-x-1 mb-20"
         >
           Enter Workspace <Sparkles className="w-5 h-5 md:w-6 md:h-6 group-hover:animate-pulse" />
@@ -192,8 +200,8 @@ const LandingPage = ({ onEnter }: { onEnter: () => void }) => {
   );
 };
 
-export default function App() {
-  const [view, setView] = useState<'landing' | 'app'>('landing');
+const Workspace = () => {
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [selectedModel, setSelectedModel] = useState(MODELS[0].id);
@@ -445,10 +453,6 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [input, output, selectedModel, selectedStyle, isGenerating, usageCount, isEmailVerified]);
 
-  if (view === 'landing') {
-    return <LandingPage onEnter={() => setView('app')} />;
-  }
-
   return (
     <div className="flex h-screen bg-km-red text-white font-display overflow-hidden selection:bg-km-red selection:text-white">
       
@@ -625,7 +629,7 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
         {/* Header with Back */}
         <div className="px-6 pt-8 pb-8 shrink-0 border-b border-white/10">
           <motion.button 
-            onClick={() => setView('landing')}
+            onClick={() => navigate('/')}
             className="text-white/60 hover:text-white flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-colors mb-8"
             whileHover={{ x: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -922,5 +926,16 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
       </div>
 
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/canvas" element={<Workspace />} />
+      </Routes>
+    </Router>
   );
 }
