@@ -12,9 +12,11 @@ import {
   Copy, RefreshCw, Heart, Star, Check, Sparkles, 
   Command, Trash2, Brain, Zap, Globe, Square, 
   BookOpen, Briefcase, Feather, TrendingUp, ArrowLeft,
-  Mail, Lock, Send, Ghost, Bolt, Infinity
+  Mail, Lock, Send, Ghost, Bolt, Infinity, Linkedin, MessageSquareQuote
 } from 'lucide-react';
 import { getHiddenSkillsContext } from './skills';
+import { LinkedInMode } from './components/LinkedInMode';
+import LabPlayground from './labs/LabPlayground';
 
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
@@ -81,7 +83,7 @@ const LandingPage = () => {
     <div className="min-h-screen w-full bg-km-red text-white overflow-x-hidden relative flex flex-col selection:bg-white selection:text-km-red">
       {/* Top Marketing Banner */}
       <div className="bg-white text-km-red text-[10px] font-bold uppercase tracking-[0.3em] py-2 text-center sticky top-0 z-[100] shadow-sm">
-        The Ritual is Open. 100% Free Public Beta Access.
+        New: High-Impact LinkedIn Studio Now Active.
       </div>
 
       {/* Grid Pattern Background - FIXED POS */}
@@ -134,45 +136,63 @@ const LandingPage = () => {
           We Steal the Soul<br/>Back from the Machine
         </div>
 
-        {/* CTA GROUP - FLEX COLUMN WITH 20PX GAP */}
-        <div className="flex flex-col items-center gap-5 mb-24 px-6">
-          <button 
-            onClick={() => navigate('/canvas')}
-            className="border-[3px] border-white bg-km-red px-8 py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center gap-4 shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-y-1 hover:translate-x-1"
-          >
-            Enter Workspace <Sparkles className="w-6 md:w-6 md:h-6 group-hover:animate-pulse" />
-          </button>
+        {/* CTA GROUP - CENTERED RHYTHM SYSTEM */}
+        <div className="flex flex-col items-center gap-12 mb-24 px-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-5">
+            <button 
+              onClick={() => navigate('/canvas')}
+              className="border-[3px] border-white bg-km-red px-8 py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-km-red transition-all duration-300 group flex items-center justify-center gap-4 shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:shadow-none hover:translate-y-1 hover:translate-x-1"
+            >
+              Ghostwriter Canvas <Sparkles className="w-6 md:w-6 group-hover:animate-pulse" />
+            </button>
 
-          <div className="flex flex-col items-center gap-2">
-            <p className="font-display text-xs uppercase tracking-[0.4em] text-white">Full Access • No Subscription • Zero Cost</p>
-            <p className="font-serif text-sm italic opacity-40">"The machine should not own your meaning. Take it back, for free."</p>
+            <button 
+              onClick={() => navigate('/linkedin')}
+              className="relative border-[3px] border-black bg-black text-white px-8 py-4 font-display text-xl md:text-3xl uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 group flex items-center justify-center gap-4 shadow-[6px_6px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-y-1 hover:translate-x-1"
+            >
+              LinkedIn Studio <Linkedin className="w-6 md:w-6" />
+              <span className="absolute -top-3 -right-3 bg-white text-black text-[10px] font-bold px-2 py-1 rounded-md shadow-lg border-2 border-black animate-bounce">NEW</span>
+            </button>
+          </div>
+
+          <div className="flex flex-col items-center gap-2 text-center max-w-2xl">
+            <p className="font-display text-xs md:text-sm uppercase tracking-[0.4em] text-white">Full Access • No Subscription • Zero Cost</p>
+            <p className="font-serif text-base md:text-lg italic opacity-60">"The machine should not own your meaning. Take it back, for free."</p>
           </div>
         </div>
 
         {/* FEATURES - FULL WIDTH BORDERED GRID SYSTEM */}
-        <section className="grid grid-cols-1 md:grid-cols-3 border-y border-white/20 w-full mb-20">
-          <div className="p-10 md:p-16 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
+        <section className="grid grid-cols-1 md:grid-cols-4 border-y border-white/20 w-full mb-20">
+          <div className="p-10 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Ghost size={20} className="text-white" />
             </div>
-            <h3 className="font-display text-2xl uppercase tracking-tight">Ghostwriter Logic</h3>
-            <p className="font-serif text-base leading-relaxed opacity-70">Not just rephrasing. We inject human rhythm, asymmetrical syntax, and visceral metaphors into every draft.</p>
+            <h3 className="font-display text-xl uppercase tracking-tight">Ghostwriter Logic</h3>
+            <p className="font-serif text-sm leading-relaxed opacity-70">Injecting human rhythm, asymmetrical syntax, and visceral metaphors into every draft.</p>
+          </div>
+
+          <div className="p-10 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
+            <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
+              <Linkedin size={20} className="text-white" />
+            </div>
+            <h3 className="font-display text-xl uppercase tracking-tight flex items-center gap-3">LinkedIn Ritual <span className="text-[8px] bg-white text-km-red px-1 rounded font-bold animate-pulse">NEW</span></h3>
+            <p className="font-serif text-sm leading-relaxed opacity-70">A specialized studio for high-impact brand building. 2-pass surgical auditing and viral DNA modeling.</p>
           </div>
           
-          <div className="p-10 md:p-16 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
+          <div className="p-10 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Bolt size={20} className="text-white" />
             </div>
-            <h3 className="font-display text-2xl uppercase tracking-tight">Triple Engine Power</h3>
-            <p className="font-serif text-base leading-relaxed opacity-70">Switch between Core, Fast, and Air engines to find the perfect balance of stability, velocity, and depth.</p>
+            <h3 className="font-display text-xl uppercase tracking-tight">Triple Engine</h3>
+            <p className="font-serif text-sm leading-relaxed opacity-70">Switch between Core, Fast, and Air engines to find the perfect balance of stability and deep reasoning.</p>
           </div>
           
-          <div className="p-10 md:p-16 space-y-4 text-left">
+          <div className="p-10 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Infinity size={20} className="text-white" />
             </div>
-            <h3 className="font-display text-2xl uppercase tracking-tight">100% Free Access</h3>
-            <p className="font-serif text-base leading-relaxed opacity-70">We are currently in public beta. All features are free to use as we refine the alchemy of meaning together.</p>
+            <h3 className="font-display text-xl uppercase tracking-tight">100% Free Access</h3>
+            <p className="font-serif text-sm leading-relaxed opacity-70">Public beta access. All features are free to use as we refine the alchemy of meaning together.</p>
           </div>
         </section>
       </main>
@@ -669,6 +689,20 @@ OUTPUT: Provide the rewritten text ONLY. Zero conversational filler.`;
         {/* Navigation / Selectors */}
         <div className="flex flex-col flex-1 px-6 pt-8 pb-5 gap-10">
           
+          {/* Specialized Studios */}
+          <div className="shrink-0">
+            <div className="text-[10px] font-bold uppercase tracking-widest opacity-60 mb-2 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-white/60"></span> Specialized Studios
+            </div>
+            <button 
+              onClick={() => navigate('/linkedin')}
+              className="w-full flex items-center gap-3 px-4 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/10 rounded-xl transition-all group"
+            >
+              <Linkedin size={16} className="text-white/60 group-hover:text-white" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">LinkedIn Ritual</span>
+            </button>
+          </div>
+
           {/* Engines - Segmented Control */}
           <div className="shrink-0">
             <div className="text-[10px] font-bold uppercase tracking-widest opacity-60 mb-1 flex items-center gap-2">
@@ -932,6 +966,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/canvas" element={<Workspace />} />
+        <Route path="/linkedin" element={<LinkedInMode />} />
+        <Route path="/labs" element={<LabPlayground />} />
       </Routes>
     </Router>
   );
