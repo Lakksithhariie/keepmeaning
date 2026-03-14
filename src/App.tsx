@@ -11,12 +11,14 @@ import {
 import { 
   Copy, RefreshCw, Heart, Star, Check, Sparkles, 
   Command, Trash2, Brain, Zap, Globe, Square, 
-  BookOpen, Briefcase, Feather, TrendingUp, ArrowLeft,
+  BookOpen, Briefcase, Feather, TrendingUp, ArrowLeft, ArrowRight,
   Mail, Lock, Send, Ghost, Bolt, Infinity, Linkedin, MessageSquareQuote
 } from 'lucide-react';
 import { getHiddenSkillsContext } from './skills';
 import { LinkedInMode } from './components/LinkedInMode';
 import LabPlayground from './labs/LabPlayground';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 const OPENROUTER_API_KEY = import.meta.env.VITE_OPENROUTER_API_KEY || '';
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
@@ -83,7 +85,7 @@ const LandingPage = () => {
     <div className="min-h-screen w-full bg-km-red text-white overflow-x-hidden relative flex flex-col selection:bg-white selection:text-km-red">
       {/* Top Marketing Banner */}
       <div className="bg-white text-km-red text-[10px] font-bold uppercase tracking-[0.3em] py-2 text-center sticky top-0 z-[100] shadow-sm">
-        New: High-Impact LinkedIn Studio Now Active.
+        Now Shipping: Voice-DNA LinkedIn Studio for Real Posts.
       </div>
 
       {/* Grid Pattern Background - FIXED POS */}
@@ -132,6 +134,18 @@ const LandingPage = () => {
 
       {/* HERO SECTION - VERTICAL RHYTHM SYSTEM */}
       <main className="flex-1 flex flex-col items-center text-center w-full z-20 pt-18 pb-0 px-0">
+        
+        <motion.div 
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-10 inline-flex items-center gap-3 border border-white/30 bg-white/10 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.35em] rounded-full shadow-lg backdrop-blur-sm"
+        >
+          <Linkedin className="h-4 w-4" />
+          <span className="text-white">New: LinkedIn Studio</span>
+          <div className="w-[1px] h-3 bg-white/30 mx-1"></div>
+          <span className="font-serif text-white/80 normal-case tracking-normal italic">For founders and experts</span>
+        </motion.div>
+
         <div className="font-display text-4xl md:text-6xl lg:text-7xl leading-[0.9] tracking-wide uppercase max-w-4xl mx-auto mb-12 px-6">
           We Steal the Soul<br/>Back from the Machine
         </div>
@@ -157,12 +171,51 @@ const LandingPage = () => {
 
           <div className="flex flex-col items-center gap-2 text-center max-w-2xl">
             <p className="font-display text-xs md:text-sm uppercase tracking-[0.4em] text-white">Full Access • No Subscription • Zero Cost</p>
-            <p className="font-serif text-base md:text-lg italic opacity-60">"The machine should not own your meaning. Take it back, for free."</p>
+            <p className="font-serif text-base md:text-lg italic opacity-60">"The machine should not own your meaning. Now, it doesn't have to own your LinkedIn voice either."</p>
           </div>
         </div>
 
+        {/* NEW FEATURE HIGHLIGHT - PREMIUM BLOCK */}
+        <section className="w-full max-w-6xl px-6 mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] border-[3px] border-white bg-km-red text-white shadow-[8px_8px_0px_rgba(255,255,255,1)] text-left">
+            <div className="p-10 md:p-16 border-b lg:border-b-0 lg:border-r-[3px] border-white flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white text-km-red text-[10px] font-bold uppercase tracking-widest mb-8 w-fit shadow-sm">
+                <Sparkles size={12} /> Studio Series
+              </div>
+              <h2 className="font-display text-4xl md:text-6xl uppercase leading-[0.9] tracking-tight max-w-2xl mb-6">
+                Train your voice.<br />
+                Keep your meaning.<br />
+                Publish like yourself.
+              </h2>
+              <p className="max-w-xl font-serif text-lg leading-relaxed text-white/90 italic">
+                The new LinkedIn Studio learns your writing patterns, preserves the sharp edge of your draft, and runs a two-pass anti-slop audit before the final post ever reaches the page.
+              </p>
+            </div>
+
+            <div className="p-10 md:p-16 flex flex-col justify-between gap-10 bg-black/10">
+              <div className="space-y-8">
+                <div className="space-y-2">
+                  <p className="font-display text-[10px] uppercase tracking-[0.3em] text-white/50 border-b border-white/20 pb-2 mb-3">The Mechanism</p>
+                  <p className="font-serif text-sm leading-relaxed text-white/90">Voice DNA extraction, historical archive memory, targeted refinement, and a cleaner path to your final post.</p>
+                </div>
+                <div className="space-y-2">
+                  <p className="font-display text-[10px] uppercase tracking-[0.3em] text-white/50 border-b border-white/20 pb-2 mb-3">The Result</p>
+                  <p className="font-serif text-sm leading-relaxed text-white/90">Sharper hooks. Less slop. More signal. A post that still feels like your mind on the page.</p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => navigate('/linkedin')}
+                className="w-full border-[2px] border-white bg-white px-6 py-5 font-display text-sm md:text-base uppercase tracking-widest text-km-red transition-all hover:bg-transparent hover:text-white flex items-center justify-center gap-3 group"
+              >
+                Enter the Studio <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </section>
+
         {/* FEATURES - FULL WIDTH BORDERED GRID SYSTEM */}
-        <section className="grid grid-cols-1 md:grid-cols-4 border-y border-white/20 w-full mb-20">
+        <section className="grid grid-cols-1 md:grid-cols-4 border-y border-white/20 w-full mb-0">
           <div className="p-10 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Ghost size={20} className="text-white" />
@@ -175,8 +228,8 @@ const LandingPage = () => {
             <div className="w-10 h-10 bg-white/10 flex items-center justify-center rounded-full">
               <Linkedin size={20} className="text-white" />
             </div>
-            <h3 className="font-display text-xl uppercase tracking-tight flex items-center gap-3">LinkedIn Ritual <span className="text-[8px] bg-white text-km-red px-1 rounded font-bold animate-pulse">NEW</span></h3>
-            <p className="font-serif text-sm leading-relaxed opacity-70">A specialized studio for high-impact brand building. 2-pass surgical auditing and viral DNA modeling.</p>
+            <h3 className="font-display text-xl uppercase tracking-tight flex items-center gap-3">Targeted Lenses</h3>
+            <p className="font-serif text-sm leading-relaxed opacity-70">Apply strategic frameworks like "The Contrarian Pivot" or "Zero-Fluff" to ensure your message hits its mark.</p>
           </div>
           
           <div className="p-10 border-b md:border-b-0 md:border-r border-white/20 space-y-4 text-left">
@@ -198,20 +251,41 @@ const LandingPage = () => {
       </main>
 
       {/* BRAND STAMP - EDITORIAL CROP */}
-      <footer className="h-[280px] flex items-end overflow-hidden relative w-full pointer-events-none z-10 shrink-0">
-        <h1 className="font-display text-[22vw] leading-[0.75] uppercase tracking-tighter m-0 text-center w-full flex flex-col translate-y-[15%]">
+      <footer className="min-h-[400px] flex flex-col justify-end overflow-hidden relative w-full z-10 shrink-0 pt-24 pb-8">
+        <h1 className="font-display text-[22vw] leading-[0.75] uppercase tracking-tighter m-0 text-center w-full flex flex-col translate-y-[15%] pointer-events-none">
           <span className="opacity-0 select-none">Keep</span>
           <span>Meaning</span>
         </h1>
         
         {/* Scattered Hearts */}
-        <Heart className="absolute bottom-[60%] left-[22%] w-16 h-16 fill-km-red text-km-red rotate-12" />
-        <Heart className="absolute bottom-[25%] left-[38%] w-12 h-12 fill-km-red text-km-red -rotate-12" />
-        <Heart className="absolute bottom-[45%] right-[28%] w-20 h-20 fill-km-red text-km-red rotate-45" />
-        <Heart className="absolute bottom-[15%] right-[18%] w-10 h-10 fill-km-red text-km-red -rotate-6" />
-        <Heart className="absolute bottom-[75%] left-[48%] w-14 h-14 fill-km-red text-km-red rotate-3" />
-        <Heart className="absolute bottom-[30%] left-[15%] w-10 h-10 fill-km-red text-km-red -rotate-12" />
-        <Heart className="absolute bottom-[65%] right-[15%] w-12 h-12 fill-km-red text-km-red rotate-12" />
+        <Heart className="absolute bottom-[60%] left-[22%] w-16 h-16 fill-km-red text-km-red rotate-12 pointer-events-none" />
+        <Heart className="absolute bottom-[25%] left-[38%] w-12 h-12 fill-km-red text-km-red -rotate-12 pointer-events-none" />
+        <Heart className="absolute bottom-[45%] right-[28%] w-20 h-20 fill-km-red text-km-red rotate-45 pointer-events-none" />
+        <Heart className="absolute bottom-[15%] right-[18%] w-10 h-10 fill-km-red text-km-red -rotate-6 pointer-events-none" />
+        <Heart className="absolute bottom-[75%] left-[48%] w-14 h-14 fill-km-red text-km-red rotate-3 pointer-events-none" />
+        <Heart className="absolute bottom-[30%] left-[15%] w-10 h-10 fill-km-red text-km-red -rotate-12 pointer-events-none" />
+        <Heart className="absolute bottom-[65%] right-[15%] w-12 h-12 fill-km-red text-km-red rotate-12 pointer-events-none" />
+
+        <div className="absolute bottom-8 w-full px-8 md:px-16 flex flex-col md:flex-row items-center justify-between gap-6 z-50">
+           <div className="text-left hidden md:block">
+              <p className="font-display text-[10px] uppercase tracking-[0.3em] text-white">Keep Meaning</p>
+              <p className="mt-1 font-serif text-[10px] italic text-white/60">
+                Editorial software for the human signal.
+              </p>
+           </div>
+
+           <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-white/50 bg-km-red/80 px-6 py-3 rounded-full backdrop-blur-sm border border-white/10">
+             <button onClick={() => navigate('/linkedin')} className="hover:text-white transition-colors cursor-pointer">LinkedIn Studio</button>
+             <button onClick={() => navigate('/privacy')} className="hover:text-white transition-colors cursor-pointer">Privacy Policy</button>
+             <button onClick={() => navigate('/terms')} className="hover:text-white transition-colors cursor-pointer">Terms</button>
+           </div>
+
+           <div className="text-right hidden md:block">
+             <p className="font-serif text-[10px] italic text-white/50">
+                Made with love in India.
+             </p>
+           </div>
+        </div>
       </footer>
     </div>
   );
@@ -968,6 +1042,8 @@ export default function App() {
         <Route path="/canvas" element={<Workspace />} />
         <Route path="/linkedin" element={<LinkedInMode />} />
         <Route path="/labs" element={<LabPlayground />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
       </Routes>
     </Router>
   );
